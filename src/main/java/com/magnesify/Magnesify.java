@@ -1,4 +1,4 @@
-package com.magnesify.wellblocks.api;
+package com.magnesify;
 
 public class Magnesify {
 

@@ -8,15 +8,15 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.magnesify.wellblocks.api.Magnesify.url_get;
+import static com.magnesify.Magnesify.url_get;
+
 
 public class Licences {
 
     public static String getResponse() {
-        com.magnesify.wellblocks.files.Licences licences = new com.magnesify.wellblocks.files.Licences();
         Map<String, String> data = new HashMap<>();
-        data.put("mail", licences.get().getString("mail"));
-        data.put("key", licences.get().getString("key"));
+        data.put("mail", ("chilljibbit@yahoo.com"));
+        data.put("key", ("12ab3daaada72787f5c179b7ac7dfe60"));
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url_get))
