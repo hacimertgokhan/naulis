@@ -1,4 +1,4 @@
-package com.magnesify;
+package com.magnesify.senders;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,17 +9,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.magnesify.Magnesify.url_get;
+import static com.magnesify.Magnesify.url_get_teams;
 
 
-public class Licences {
+public class Licences3 {
 
-    public static String getResponse() {
+    public static String getTeamResponse() {
         Map<String, String> data = new HashMap<>();
-        data.put("mail", ("chilljibbit@yahoo.com"));
-        data.put("key", ("12ab3daaada72787f5c179b7ac7dfe60"));
+        data.put("name", ("gloria"));
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url_get))
+                .uri(URI.create(url_get_teams))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(mapToJson(data)))
                 .build();
