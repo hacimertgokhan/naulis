@@ -1,0 +1,2 @@
+[url]
+url_get = "http://localhost:8000/licenses/get"

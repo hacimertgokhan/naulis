@@ -8,34 +8,36 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.magnesify.Magnesify.url_get;
-import static com.magnesify.Magnesify.url_get_teams;
+import static com.magnesify.Main.url_get;
 
+public class Request {
+    private String data;
 
-public class Licences3 {
+    public Request(String email, String key) {
+        request(email, key);
+    }
 
-    public static String getTeamResponse() {
+    private void request(String email, String key) {
         Map<String, String> data = new HashMap<>();
-        data.put("name", ("gloria"));
+        data.put("email", (email));
+        data.put("licenseKey", (key));
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url_get_teams))
+                .uri(URI.create(url_get))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(mapToJson(data)))
                 .build();
-
         HttpResponse<String> response = null;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        return response.body();
+        setData(response.body());
     }
-    private static String mapToJson(Map<String, String> map) {
+
+    private String mapToJson(Map<String, String> map) {
         StringBuilder json = new StringBuilder("{");
         for (Map.Entry<String, String> entry : map.entrySet()) {
             json.append("\"").append(entry.getKey()).append("\":\"").append(entry.getValue()).append("\",");
@@ -45,4 +47,11 @@ public class Licences3 {
         return json.toString();
     }
 
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 }

@@ -1,30 +1,52 @@
 package com.magnesify;
 
-import static com.magnesify.senders.Licences1.getResponse;
-import static com.magnesify.senders.Licences3.getTeamResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.magnesify.senders.Request;
+import com.moandjiezana.toml.Toml;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
-        // 0 ip
-        // 1 mail
-        // 2 anahtar
-        // 3 ürün
-        /*
-                for(int i = 0; i < a.length; i++) {
-            System.out.println(a[i].replace("{", "").replaceAll("\"", "").replace("key:", "").replace("email:", "").replace("server:", "").replace("product:", "").replace("}", ""));
-            if(a[0].replace("{", "").replaceAll("\"", "").replace("server:", "").replace("product:", "").replace("}", "").equalsIgnoreCase("localhost:25565")) {
-                System.out.println("Lisans geçerli");
-            } else {
-                System.out.println("Lisans geçersiz");
+    public static String url_get;
+
+    public static void loadToml() {
+        File file = new File("licenses.toml");
+        if (file.exists()) {
+            Toml toml = new Toml().read(file);
+            url_get = toml.getString("url.url_get");
+        } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
-         */
 
-        // 0 status
-        String[] a = getTeamResponse().split(",");
-        for(int i = 0; i < a.length; i++) {
-            System.out.println(a[0].replace("{", "").replaceAll("\"", "").replace("status:", "").replace("key:", "").replace("email:", "").replace("server:", "").replace("product:", "").replace("}", ""));
-        }
     }
+
+    public static void main(String[] args) {
+        loadToml();
+        Request request = new Request("hacimertgokhan@gmail.com", "431007b7-eb9f-495d-8aad-997fcbf40364");
+        String a = request.getData();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String prettyJson;
+        Object jsonObj = null;
+        try {
+            jsonObj = objectMapper.readValue(a, Object.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            prettyJson = objectMapper.writeValueAsString(jsonObj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(prettyJson);
+    }
+
 }
