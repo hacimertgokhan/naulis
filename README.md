@@ -13,58 +13,16 @@ Karmaşık konfigürasyonlarla uğraşmadan, REST API'ler ile hızlı ve güveni
 
 ## 🚀 Kurulum (Maven)
 
-Naulis, GitHub Packages üzerinden dağıtılmaktadır. Projenize eklemek için aşağıdaki adımları izleyin.
-
-### Adım 1: `pom.xml` Dosyanıza Bağımlılığı Ekleyin
+Naulis, GitHub Packages üzerinden dağıtılmaktadır.
 
 ```xml
-<dependency>
-  <groupId>com.magnesify</groupId>
-  <artifactId>naulis</artifactId>
-  <version>1.0.1-alpha</version> <!-- En güncel sürümü kontrol edin -->
-</dependency>
+        <dependency>
+            <groupId>com.magnesify</groupId>
+            <artifactId>naulis</artifactId>
+            <version>v2.1.0-rc</version>
+        </dependency>
 ```
 
-### Adım 2: `pom.xml` Dosyanıza GitHub Packages Deposunu Ekleyin
-
-Naulis, Maven Central yerine GitHub Packages üzerinde barındırıldığı için, Maven'a bu depoyu nerede bulacağını söylemeniz gerekir. `pom.xml` dosyanızın içine aşağıdaki `<repositories>` bloğunu ekleyin.
-
-```xml
-<repositories>
-    <repository>
-        <id>github</id>
-        <url>https://maven.pkg.github.com/hacimertgokhan/naulis</url>
-    </repository>
-</repositories>
-```
-
-### Adım 3: GitHub Packages için Kimlik Doğrulama
-
-GitHub Packages, özel ve genel paketlere erişim için kimlik doğrulaması gerektirir. Bunun için bir **Personal Access Token (PAT)** oluşturmanız ve Maven'ı bu token'ı kullanacak şekilde yapılandırmanız gerekir.
-
-1.  **Personal Access Token Oluşturun:**
-    *   [GitHub'da PAT oluşturma sayfasına](https://github.com/settings/tokens/new) gidin.
-    *   Token'a bir isim verin (örn: `MAVEN_GITHUB_PACKAGES`).
-    *   Token'a **`read:packages`** yetkisini verin.
-    *   Token'ı oluşturun ve **güvenli bir yere kopyalayın**. Bu token'ı tekrar göremeyeceksiniz.
-
-2.  **Maven `settings.xml` Dosyasını Yapılandırın:**
-    *   `~/.m2/settings.xml` dosyanızı (eğer yoksa oluşturun) açın ve aşağıdaki `<server>` bloğunu ekleyin.
-    *   `YOUR_GITHUB_USERNAME` kısmını kendi GitHub kullanıcı adınızla, `YOUR_PERSONAL_ACCESS_TOKEN` kısmını ise az önce oluşturduğunuz token ile değiştirin.
-
-    ```xml
-    <settings>
-      <servers>
-        <server>
-          <id>github</id>
-          <username>YOUR_GITHUB_USERNAME</username>
-          <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
-        </server>
-      </servers>
-    </settings>
-    ```
-
-Artık projeniz `mvn install` veya `mvn package` komutları ile çalıştırıldığında Naulis kütüphanesini GitHub'dan sorunsuzca indirecektir.
 
 ## 💻 Kullanım
 
