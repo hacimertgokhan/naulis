@@ -6,7 +6,7 @@
 
     <groupId>com.magnesify</groupId>
     <artifactId>naulis</artifactId>
-    <version>1.0.0alpha</version>
+    <version>v1.0.0-rc</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
